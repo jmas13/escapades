@@ -1,0 +1,6 @@
+<% @escapades.each do |escapade| %>
+<div class = "escapade">
+<h2><%= escapade.title %></h2>
+<%= link_to (image_tag escapade.image), escapade_path(escapade) %>
+</div>
+<% end %>

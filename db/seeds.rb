@@ -5,3 +5,4 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Escapade.create(title: "Thailand", image: "http://i.huffpost.com/gen/1460673/images/o-THAILAND-facebook.jpg", start_date: "2016-01-01", end_date: "2016-05-01")

@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'google-webfonts'
 gem 'pry'
 gem 'devise'
 gem 'rails_12factor'
