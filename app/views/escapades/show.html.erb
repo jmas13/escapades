@@ -1,10 +1,19 @@
 <h2><%= @escapade.title %></h2>
-<div class = "escapade description">
-  <%= image_tag @escapade.image %>
-  <%= @escapade.description %>
+<div class = "idea clearfix" >
+  <div class = "escapade description">
+    <%= image_tag @escapade.image %>
+    <%= @escapade.description %>
+  </div>
+  <div class = "timeframe">
+    <h3>Timeframe: </h3>
+      <p><%= "#{@escapade.start_date.strftime('%B %-d, %G')} - #{@escapade.end_date.strftime('%B %-d, %G')}"%></p>
+    <%= link_to "Edit Idea", edit_escapade_path(@escapade) %>
+    <%= link_to "Respond", new_escapade_response_path(@escapade) %>
+  </div>
 </div>
-<div class = "timeframe">
-  <h3>Timeframe: </h3>
-    <p><%= "#{@escapade.start_date.strftime('%B %-d, %G')} - #{@escapade.end_date.strftime('%B %-d, %G')}"%></p>
-  <%= link_to "Edit Idea", edit_escapade_path(@escapade) %>
+<div class = "responses">
+  <% @responses.each do |response| %>
+  <%= response.comment %>
+  <%= link_to "Edit Comment", edit_escapade_response_path(@escapade, response) %>
+  <% end %>
 </div>

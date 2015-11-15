@@ -6,6 +6,7 @@ class EscapadesController < ApplicationController
 
   def show
     @escapade = Escapade.find(params[:id])
+    @responses = @escapade.responses
   end
 
   def new
@@ -13,7 +14,7 @@ class EscapadesController < ApplicationController
   end
 
   def create
-    @escapade = Escapade.new(escapade_params)
+    @escapade = current_user.escapades.new(escapade_params)
     if @escapade.save
       flash[:notice] = "You have successfully posted your new idea!"
       redirect_to escapade_path(@escapade)
