@@ -1,0 +1,13 @@
+<%= form_for @escapade do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title, placeholder: "Title" %>
+  <%= f.label :start_date %>
+  <%= f.text_field :start_date, placeholder: "yyyy-mm-dd" %>
+  <%= f.label :end_date %>
+  <%= f.text_field :end_date, placeholder: "yyyy-mm-dd" %>
+  <%= f.label :image %>
+  <%= f.text_field :image, placeholder: "Image URL" %>
+  <%= f.label :description %>
+  <%= f.text_field :description, placeholder: "Description" %>
+  <%= f.submit %>
+<% end %>

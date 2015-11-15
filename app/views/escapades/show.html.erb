@@ -5,5 +5,6 @@
 </div>
 <div class = "timeframe">
   <h3>Timeframe: </h3>
-    <p><%= "#{@escapade.start_date.strftime('%B %C, %G')} - #{@escapade.end_date.strftime('%B %C, %G')}"%></p>
+    <p><%= "#{@escapade.start_date.strftime('%B %-d, %G')} - #{@escapade.end_date.strftime('%B %-d, %G')}"%></p>
+  <%= link_to "Edit Idea", edit_escapade_path(@escapade) %>
 </div>
