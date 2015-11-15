@@ -1,1 +1,9 @@
 <h2><%= @escapade.title %></h2>
+<div class = "escapade description">
+  <%= image_tag @escapade.image %>
+  <%= @escapade.description %>
+</div>
+<div class = "timeframe">
+  <h3>Timeframe: </h3>
+    <p><%= "#{@escapade.start_date.strftime('%B %C, %G')} - #{@escapade.end_date.strftime('%B %C, %G')}"%></p>
+</div>

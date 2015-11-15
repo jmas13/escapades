@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Project2</title>
-  <%= google_webfonts_link_tag 'Slabo 27px' %>
+  <title>Escapades</title>
+  <%= google_webfonts_link_tag 'Roboto:300' %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<h1>Escapades</h1>
-<hr>
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-<%= yield %>
-
+  <header>
+    <div class = "login">
+      <% if current_user %>
+        <%= current_user.email %>
+        <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "Sign Up", new_user_registration_path %>
+        <%= link_to "Log In", new_user_session_path %>
+      <% end %>
+    </div>
+    <h1><%= link_to "Escapades", root_path %></h1>
+    <hr>
+  </header>
+  <main>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+  </main>
 </body>
 </html>

@@ -1,13 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: 'Slabo 27px', serif;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 > a {
+  text-transform: lowercase;
+  text-decoration: none;
+  color: inherit;
+}
+
+h3 {
+  display: inline-block;
+  margin: 0;
+}
+
+.login {
+  float: right;
 }
 
 .escapade {
-  width: 25%;
-  min-width: 200px;
+  border: 3px ridge;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
 }
 
 .escapade img {
   max-width: 100%;
   max-height: 100%;
+}
+
+.escapade h2 {
+  margin: 0 auto;
+}
+
+.thumbnail {
+  width: 25%;
+  min-width: 200px;
+}
+
+.description {
+  width: 60%;
+  min-width: 400px;
+  float: left;
+}
+
+.timeframe {
+  width: calc(40%-10px);
+  display: inline-block;
+  float: left;
+  margin: 20px;
 }
