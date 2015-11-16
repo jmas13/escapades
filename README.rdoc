@@ -1,5 +1,7 @@
 == README
 
+This application is for planning trips with friends. A user can post an idea for a trip and their friends can post the dates they are available.
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
