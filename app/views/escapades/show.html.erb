@@ -1,19 +1,32 @@
 <h2><%= @escapade.title %></h2>
+<h3><%= @escapade.user.email %></h3>
 <div class = "idea clearfix" >
   <div class = "escapade description">
     <%= image_tag @escapade.image %>
     <%= @escapade.description %>
   </div>
   <div class = "timeframe">
-    <h3>Timeframe: </h3>
+    <h3>Timeframe:</h3>
       <p><%= "#{@escapade.start_date.strftime('%B %-d, %G')} - #{@escapade.end_date.strftime('%B %-d, %G')}"%></p>
     <%= link_to "Edit Idea", edit_escapade_path(@escapade) %>
     <%= link_to "Respond", new_escapade_response_path(@escapade) %>
+    <h3>Optimal Dates:</h3>
+    <% @optimal_dates = (@escapade.start_date..@escapade.end_date).to_a %>
+    <% @users.each do |user| %>
+      <% user_availability = [] %>
+      <% (user.responses & @escapade.responses).each do |response| %>
+        <% user_availability = user_availability + (response.start_date..response.end_date).to_a %>
+      <% end %>
+      <% @optimal_dates = @optimal_dates & user_availability.sort! %>
+
+    <% end %>
+    <p><%= "#{@optimal_dates.first} - #{@optimal_dates.last}" %></p>
   </div>
 </div>
 <div class = "responses">
   <% @responses.each do |response| %>
-  <%= response.comment %>
-  <%= link_to "Edit Comment", edit_escapade_response_path(@escapade, response) %>
+  <h4><%= response.user.email %></h4>
+  <p><%= response.comment %>
+  <%= link_to "Edit Comment", edit_escapade_response_path(@escapade, response) %></p>
   <% end %>
 </div>

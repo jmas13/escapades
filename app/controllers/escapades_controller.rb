@@ -1,3 +1,4 @@
+require 'pry'
 class EscapadesController < ApplicationController
 
   def index
@@ -7,6 +8,7 @@ class EscapadesController < ApplicationController
   def show
     @escapade = Escapade.find(params[:id])
     @responses = @escapade.responses
+    @users = User.where.not(id: @escapade.user.id)
   end
 
   def new
@@ -44,6 +46,6 @@ class EscapadesController < ApplicationController
 
   private
   def escapade_params
-    params.require(:escapade).permit(:title, :image, :description, :start_date, :end_date)
+    params.require(:escapade).permit(:title, :image, :description, :start_date, :end_date).merge(user_id: current_user.id)
   end
 end

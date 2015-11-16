@@ -43,6 +43,6 @@ class ResponsesController < ApplicationController
 
   private
   def response_params
-    params.require(:response).permit(:comment, :start_date, :end_date)
+    params.require(:response).permit(:comment, :start_date, :end_date).merge(user_id: current_user.id)
   end
 end

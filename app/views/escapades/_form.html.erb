@@ -1,3 +1,5 @@
+<%= @escapade.errors.full_messages.first if @escapade.errors.any? %>
+
 <%= form_for @escapade do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title, placeholder: "Title" %>
