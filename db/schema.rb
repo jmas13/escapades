@@ -11,35 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115145908) do
+ActiveRecord::Schema.define(version: 20151115005305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "escapades", force: :cascade do |t|
-    t.string   "title"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.string   "title",                                                                                                                                  null: false
+    t.date     "start_date",                                                                                                                             null: false
+    t.date     "end_date",                                                                                                                               null: false
     t.string   "location"
     t.string   "activity"
     t.string   "description"
-    t.string   "image"
-    t.string   "status"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "image",       default: "http://www.outdoorfitnessisrael.co.il/wp-content/themes/envision-v1/lib/images/default-placeholder-960x540.png"
+    t.string   "status",      default: "idea"
     t.integer  "user_id"
+    t.datetime "created_at",                                                                                                                             null: false
+    t.datetime "updated_at",                                                                                                                             null: false
   end
 
   add_index "escapades", ["user_id"], name: "index_escapades_on_user_id", using: :btree
 
   create_table "responses", force: :cascade do |t|
     t.string   "comment"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.date     "start_date",  null: false
+    t.date     "end_date",    null: false
     t.integer  "user_id"
     t.integer  "escapade_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "responses", ["escapade_id"], name: "index_responses_on_escapade_id", using: :btree
