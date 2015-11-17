@@ -41,3 +41,16 @@ result_array.reject do |i|
   result_array.include?(i+1) && result_array.include?(i-1) end
 
 puts "the end"
+
+<% @optimal_dates = (@escapade.start_date..@escapade.end_date).to_a %>
+<% @users.each do |user| %>
+  <% user_availability = [] %>
+  <% (user.responses & @escapade.responses).each do |response| %>
+    <% user_availability = user_availability + (response.start_date..response.end_date).to_a %>
+  <% end %>
+  <% @optimal_dates = @optimal_dates & user_availability.sort! %>
+  <%@optimal_dates = @optimal_dates.reject do |i| @optimal_dates.include?(i-1) & @optimal_dates.include?(i+1) end %>
+  <% end %>
+  <% @optimal_dates.each_slice(2) do |i|%>
+<p><%= "#{i.first.strftime('%B %-d, %G')} - #{i.last.strftime('%B %-d, %G')}" %></p>
+<% end %>

@@ -8,7 +8,7 @@ class EscapadesController < ApplicationController
   def show
     @escapade = Escapade.find(params[:id])
     @responses = @escapade.responses
-    @users = User.where.not(id: @escapade.user.id)
+    @optimal_dates = get_optimal_dates @escapade
   end
 
   def new
