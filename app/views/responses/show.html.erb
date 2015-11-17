@@ -1,0 +1,19 @@
+<h2>Response</h2>
+  <h3>Comment:</h3>
+    <p><%= @response.comment %></p>
+      <% if current_user == @response.user %>
+        <%= link_to "Edit comment", edit_escapade_response_path(@escapade,@response) %>
+      <% end %>
+  <h3>Current Availability:</h3>
+    <% (@response.user.responses & @escapade.responses).each do |response| %>
+      <p>
+        <%= "#{response.start_date.strftime('%B %-d, %Y')} - #{response.end_date.strftime('%B %-d, %Y')}"%>
+        <% if current_user == @response.user %>
+          <%= link_to "Edit this date range", edit_escapade_response_path(@escapade,response) %>
+        <% end %>
+      </p>
+    <% end %>
+    <% if current_user == @response.user %>
+      <%= link_to "Add to Availability", new_escapade_response_path(@escapade) %>
+    <% end %>
+    <%= link_to "Back to Escapade", escapade_path(@escapade) %>

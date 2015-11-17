@@ -1,26 +1,42 @@
 <h2><%= @escapade.title %></h2>
-<h3><%= @escapade.user.email %></h3>
-<div class = "idea clearfix" >
-  <div class = "escapade description">
-    <%= image_tag @escapade.image %>
-    <%= @escapade.description %>
-  </div>
-  <div class = "timeframe">
-    <h3>Timeframe:</h3>
-      <p><%= "#{@escapade.start_date.strftime('%B %-d, %Y')} - #{@escapade.end_date.strftime('%B %-d, %Y')}"%></p>
-    <%= link_to "Edit Idea", edit_escapade_path(@escapade) %>
-    <%= link_to "Respond", new_escapade_response_path(@escapade) %>
-    <h3>Optimal Dates:</h3>
-      <% @optimal_dates.each do |i|%>
-      <p><%= "#{i.first.strftime('%B %-d, %Y')} - #{i.last.strftime('%B %-d, %Y')}" %></p>
+  <h3><%= @escapade.user.email %></h3>
+  <div class = "idea clearfix" >
+    <div class = "escapade description">
+      <%= image_tag @escapade.image %>
+      <%= @escapade.description %>
+    </div>
+    <div class = "timeframe">
+      <h3>Timeframe:</h3>
+        <p><%= "#{@escapade.start_date.strftime('%B %-d, %Y')} - #{@escapade.end_date.strftime('%B %-d, %Y')}"%></p>
+      <% if current_user == @escapade.user %>
+        <%= link_to "Edit Idea", edit_escapade_path(@escapade) %>
+        <h3>Optimal Dates:</h3>
+          <% @optimal_dates.each do |i|%>
+            <p><%= "#{i.first.strftime('%B %-d, %Y')} - #{i.last.strftime('%B %-d, %Y')}" %></p>
+          <% end %>
+      <% elsif (current_user.responses & @escapade.responses).empty? %>
+        <%= link_to "I'm interested in this escapade!", new_escapade_response_path(@escapade) %>
+      <% else %>
+        <%= link_to "I'm no longer interested in this escapade" %>
       <% end %>
-      <%= @optimal_dates %>
+    </div>
   </div>
-</div>
-<div class = "responses">
-  <% @responses.each do |response| %>
-  <h4><%= response.user.email %></h4>
-  <p><%= response.comment %>
-  <%= link_to "Edit Comment", edit_escapade_response_path(@escapade, response) %></p>
-  <% end %>
-</div>
+  <div class = "responses">
+    <h3>Responses:</h3>
+      <% @responses.each do |response| %>
+        <% unless response.comment.empty? %>
+          <ul>
+            <li><%= response.user.email %>
+              <% if current_user == response.user %>
+                <%= link_to "Edit", escapade_response_path(@escapade, response) %>
+              <% else %>
+                <%= link_to "Availability", escapade_response_path(@escapade, response) %>
+              <% end %>
+            </li>
+            <ul>
+              <li><%= response.comment %></li>
+            </ul>
+          </ul>
+        <% end %>
+      <% end %>
+  </div>

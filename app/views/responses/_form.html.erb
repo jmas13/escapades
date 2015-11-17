@@ -1,3 +1,6 @@
+<h2>When are you available?</h2>
+<p>(This escapade will occur between <%= @escapade.start_date.strftime('%B %-d, %Y') %> and <%= @escapade.end_date.strftime('%B %-d, %Y') %>)
+
 <%= @response.errors.full_messages.first if @response.errors.any? %>
 
 <%= form_for([@escapade, @response ]) do |f| %>

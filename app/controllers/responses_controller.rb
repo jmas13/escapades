@@ -5,12 +5,17 @@ class ResponsesController < ApplicationController
     @response = Response.new
   end
 
+  def show
+    @escapade = Escapade.find(params[:escapade_id])
+    @response = Response.find(params[:id])
+  end
+
   def create
     @escapade = Escapade.find(params[:escapade_id])
     @response = @escapade.responses.new(response_params)
     if @response.save
       flash[:notice] = "Your response has been posted!"
-      redirect_to escapade_path(@escapade)
+      redirect_to escapade_response_path(@escapade, @response)
     else
       render :new
     end

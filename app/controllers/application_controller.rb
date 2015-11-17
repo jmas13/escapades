@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
       (user.responses & escapade.responses).each do |response|
         user_availability = user_availability + (response.start_date..response.end_date).to_a
       end
-      optimal_dates = optimal_dates & user_availability unless user_availability.blank?
+      optimal_dates = optimal_dates & user_availability unless user_availability.empty?
     end
     optimal_dates = optimal_dates.reject do |i|
       optimal_dates.include?(i-1) & optimal_dates.include?(i+1)
