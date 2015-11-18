@@ -2,16 +2,23 @@ require 'pry'
 class CommitsController < ApplicationController
 
   def create
-    binding.pry
-    @escapade = Escapade.find(params[:escapade_id])
     commit = Commit.create(commit_params)
+    commit.update(escapade_id: params[:escapade_id])
     flash[:notice] = "You have committed to this event"
-    redirect_to escapade_path(@escapade)
+    redirect_to escapade_path(commit.escapade.id)
   end
+
+  def destroy
+    @commit = Commit.find(params[:id])
+    @commit.destroy
+    flash[:notice] = "You have removed yourself from this event's attendees"
+  end
+
+
 
   private
   def commit_params
-    params.require(:commit).permits(:status, :escapade_id).merge(user_id: current_user.id)
+    params.require(:new_commit).permit(:status).merge(user_id: current_user.id)
   end
 
 

@@ -12,6 +12,7 @@ class EscapadesController < ApplicationController
       @commits = @escapade.commits
       @current_commit = current_user.commits & @commits
       @commit = Commit.new
+      binding.pry
       render 'show_event'
     end
     @responses = @escapade.responses
