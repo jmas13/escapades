@@ -1,3 +1,6 @@
+<% if @response.availabilities.empty? %>
+  <h2>When are you available?</h2>
+<% else %>
 <h2>Response</h2>
   <h3>Comment:</h3>
     <p><%= @response.comment %></p>
@@ -5,15 +8,26 @@
         <%= link_to "Edit comment", edit_escapade_response_path(@escapade,@response) %>
       <% end %>
   <h3>Current Availability:</h3>
-    <% (@response.user.responses & @escapade.responses).each do |response| %>
+    <% @response.availabilities.each do |availability| %>
       <p>
-        <%= "#{response.start_date.strftime('%B %-d, %Y')} - #{response.end_date.strftime('%B %-d, %Y')}"%>
+        <%= "#{availability.start_date.strftime('%B %-d, %Y')} - #{availability.end_date.strftime('%B %-d, %Y')}"%>
         <% if current_user == @response.user %>
-          <%= link_to "Edit this date range", edit_escapade_response_path(@escapade,response) %>
+          <%= link_to "Edit this date range", edit_availability_path(availability) %>
         <% end %>
       </p>
     <% end %>
+<% end %>
     <% if current_user == @response.user %>
-      <%= link_to "Add to Availability", new_escapade_response_path(@escapade) %>
+      <h3>Add Availability: </h3>
+        <p>(This escapade will occur between <%= @escapade.start_date.strftime('%B %-d, %Y') %> and <%= @escapade.end_date.strftime('%B %-d, %Y') %>)</p>
+        <%= form_for @availability do |f| %>
+        <%= f.hidden_field :response_id, value: @response.id %>
+        <%= f.hidden_field :escapade_id, value: @escapade.id %>
+        <%= f.label :start_date %>
+        <%= f.date_field :start_date %>
+        <%= f.label :end_date %>
+        <%= f.date_field :end_date %>
+        <%= f.submit %>
+        <% end %>
     <% end %>
     <%= link_to "Back to Escapade", escapade_path(@escapade) %>

@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
+
   root to: 'escapades#index'
+  
   resources :escapades do
     resources :responses
   end
+
+  resources :availabilities
 
 
   # The priority is based upon order of creation: first created -> highest priority.

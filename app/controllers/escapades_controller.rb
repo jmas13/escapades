@@ -1,4 +1,3 @@
-require 'pry'
 class EscapadesController < ApplicationController
 
   def index
@@ -8,6 +7,7 @@ class EscapadesController < ApplicationController
   def show
     @escapade = Escapade.find(params[:id])
     @responses = @escapade.responses
+    @response = current_user.responses & @escapade.responses
     @optimal_dates = get_optimal_dates @escapade
   end
 

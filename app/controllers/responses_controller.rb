@@ -3,11 +3,13 @@ class ResponsesController < ApplicationController
   def new
     @escapade = Escapade.find(params[:escapade_id])
     @response = Response.new
+    @availability = Availability.new
   end
 
   def show
     @escapade = Escapade.find(params[:escapade_id])
     @response = Response.find(params[:id])
+    @availability = Availability.new
   end
 
   def create

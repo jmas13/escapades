@@ -1,4 +1,3 @@
-require 'pry'
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -12,7 +11,9 @@ class ApplicationController < ActionController::Base
     users.each do |user|
       user_availability = []
       (user.responses & escapade.responses).each do |response|
-        user_availability = user_availability + (response.start_date..response.end_date).to_a
+        response.availabilities do |availability|
+          user_availability = user_availability + (availability.start_date..availability.end_date).to_a
+        end
       end
       optimal_dates = optimal_dates & user_availability unless user_availability.empty?
     end

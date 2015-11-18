@@ -17,4 +17,4 @@ Escapade.create(title: "Trapeze Class", image: "http://washingtondc.trapezeschoo
 
 Escapade.create(title: "Wonder Exhibit", image: "http://media.npr.org/assets/img/2015/11/12/grade_middlefork_custom-a23c871f26659f6ab1a6ff2891a18ec445f47416-s800-c85.jpg", start_date: "2015-11-16", end_date: "2015-12-19", description: "In the Renwick's newly renovated gallery in Washington, D.C., nine artists were each given free rein over a space to create inspiring installations. Tara Donovan used hundreds of thousands of index cards to create a mountain range. Gabriel Dawe made a rainbow out of some 60 miles of colored thread. Patrick Dougherty turned sticks into giant, swirling nests.", user_id: 2)
 
-Response.create(comment: "This sounds awesome!", start_date: "2016-01-01", end_date: "2016-01-31", escapade_id: 1, user_id: 2)
+Response.create(comment: "This sounds awesome!", escapade_id: 1, user_id: 2)
