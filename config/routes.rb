@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   resources :escapades do
     resources :responses
     resources :availabilities, only: [:index]
-    resources :commits
+    member do
+      post 'add_commit'
+      delete 'remove_commit'
+    end
   end
 
   resources :availabilities, only: [:create, :edit, :update]

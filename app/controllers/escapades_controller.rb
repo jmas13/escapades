@@ -1,4 +1,3 @@
-require 'pry'
 class EscapadesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
@@ -12,7 +11,6 @@ class EscapadesController < ApplicationController
       @commits = @escapade.commits
       @current_commit = current_user.commits & @commits
       @commit = Commit.new
-      binding.pry
       render 'show_event'
     end
     @responses = @escapade.responses
@@ -51,6 +49,19 @@ class EscapadesController < ApplicationController
   def destroy
     Escapade.find(params[:id]).destroy
     redirect_to escapades_path
+  end
+
+  def add_commit
+    @escapade = Escapade.find(params[:id])
+    @escapade.commits.create(user: current_user)
+    flash[:notice] = "You have committed to this event"
+    redirect_to escapade_path(@escapade)
+  end
+
+  def remove_commit
+    @escapade = Escapade.find(params[:id])
+    @escapade.commits.where(user: current_user).destroy_all
+    redirect_to escapade_path(@escapade)
   end
 
   private

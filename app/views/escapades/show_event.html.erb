@@ -16,13 +16,10 @@
           <%= f.radio_button :status, :idea %>
           <%= f.submit %>
         <% end %>
-      <% elsif @current_commit.empty? || @current_commit[0].status == false %>
-        <%= form_for [@escapade, @commit], as: :new_commit do |f| %>
-        <%= f.hidden_field :status, value: true %>
-        <%= f.submit "I'll be there!"%>
-        <% end %>
+      <% elsif @escapade.commits.where(user: current_user).empty? %>
+        <%= link_to "I'll be there!", add_commit_escapade_path(@escapade), method: :post %>
       <% else %>
-        <%= link_to "I can't make it", commit_path(@current_commit), method: :delete %>
+        <%= link_to "I can't make it", remove_commit_escapade_path(@escapade), method: :delete %>
       <% end %>
     </div>
   </div>
@@ -30,10 +27,8 @@
     <% if @commits %>
       <h3>Attendees:</h3>
         <ul>
-          <% @commits.each do |commit| %>
-            <% if commit.status %>
-              <li><%= commit.user.email %></li>
-            <% end %>
+          <% @escapade.commits do |commit| %>
+            <li><%= commit.user.email %></li>
           <% end %>
         </ul>
     <% else %>

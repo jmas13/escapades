@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118144624) do
+ActiveRecord::Schema.define(version: 20151118221231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20151118144624) do
   add_index "availabilities", ["response_id"], name: "index_availabilities_on_response_id", using: :btree
 
   create_table "commits", force: :cascade do |t|
-    t.boolean  "status",      null: false
     t.integer  "user_id"
     t.integer  "escapade_id"
     t.datetime "created_at",  null: false
