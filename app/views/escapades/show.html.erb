@@ -14,9 +14,16 @@
           <% @optimal_dates.each do |i|%>
             <p><%= "#{i.first.strftime('%B %-d, %Y')} - #{i.last.strftime('%B %-d, %Y')}" %></p>
           <% end %>
+        <%= link_to "View all availability", escapade_availabilities_path(@escapade) %>
+        <h3>Upgrade Your Idea to an Event:</h3>
+        <%= form_for @escapade do |f| %>
+          <%= f.radio_button :status, :event %>
+          <%= f.submit %>
+        <% end %>
       <% elsif @response.empty? %>
         <%= link_to "I'm interested in this escapade!", new_escapade_response_path(@escapade) %>
       <% else %>
+        <%= link_to "Edit my availability", escapade_response_path(@escapade, @response) %>
         <%= link_to "I'm no longer interested in this escapade", escapade_response_path(@escapade, @response), method: :delete %>
       <% end %>
     </div>

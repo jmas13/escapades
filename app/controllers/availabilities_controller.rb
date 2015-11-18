@@ -1,4 +1,10 @@
 class AvailabilitiesController < ApplicationController
+  before_action :authenticate_user!
+
+  def index
+    @escapade = Escapade.find(params[:escapade_id])
+    @responses = @escapade.responses
+  end
 
   def create
     response = Response.find(params[:availability][:response_id])

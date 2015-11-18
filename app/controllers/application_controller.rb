@@ -7,13 +7,10 @@ class ApplicationController < ActionController::Base
 
   def get_optimal_dates escapade
     optimal_dates = (escapade.start_date..escapade.end_date).to_a
-    users = User.where.not(id: escapade.user.id)
-    users.each do |user|
+    escapade.responses.each do |response|
       user_availability = []
-      (user.responses & escapade.responses).each do |response|
-        response.availabilities do |availability|
-          user_availability = user_availability + (availability.start_date..availability.end_date).to_a
-        end
+      response.availabilities.each do |availability|
+        user_availability = user_availability + (availability.start_date..availability.end_date).to_a
       end
       optimal_dates = optimal_dates & user_availability unless user_availability.empty?
     end

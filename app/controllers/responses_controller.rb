@@ -1,4 +1,5 @@
 class ResponsesController < ApplicationController
+  before_action :authenticate_user!
 
   def new
     @escapade = Escapade.find(params[:escapade_id])
@@ -33,7 +34,7 @@ class ResponsesController < ApplicationController
     @response = Response.find(params[:id])
     if @response.update(response_params)
       flash[:notice] = "You have successfully updated your response"
-      redirect_to escapade_path(@escapade)
+      redirect_to escapade_response_path(@escapade, @response)
     else
       render :edit
     end
@@ -43,7 +44,7 @@ class ResponsesController < ApplicationController
     @escapade = Escapade.find(params[:escapade_id])
     @response = Response.find(params[:id])
     @response.destroy
-    flash[:notice] = "You are no longer interested in this idea"
+    flash[:notice] = "You have removed your availability for this idea"
     redirect_to escapade_path(@escapade)
   end
 

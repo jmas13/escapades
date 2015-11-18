@@ -1,0 +1,15 @@
+<% if @responses.empty? %>
+  <h2>No one has responded yet</h2>
+<% else %>
+  <h2>Responses:</h2>
+  <% @responses.each do |response| %>
+    <h3><%= response.user.email %></h3>
+      <% response.availabilities.each do |availability| %>
+      <ul>
+        <li>
+          <%= "#{availability.start_date.strftime('%B %-d, %Y')} - #{availability.end_date.strftime('%B %-d, %Y')}"%>
+        </li>
+      </ul>
+      <% end %>
+  <% end %>
+<% end %>

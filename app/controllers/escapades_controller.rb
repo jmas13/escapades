@@ -1,4 +1,6 @@
+require 'pry'
 class EscapadesController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
 
   def index
     @escapades = Escapade.all
@@ -30,6 +32,7 @@ class EscapadesController < ApplicationController
   end
 
   def update
+    binding.pry
     @escapade = Escapade.find(params[:id])
     if @escapade.update(escapade_params)
       flash[:notice] = "You have successfully updated your idea!"

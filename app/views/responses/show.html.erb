@@ -1,25 +1,33 @@
-<% if @response.availabilities.empty? %>
+<% if current_user != @response.user %>
+  <h2><%= @response.user.email %> </h2>
+    <p><%= @response.comment %></p>
+    <h3>Current Availability:</h3>
+      <% @response.availabilities.each do |availability| %>
+      <ul>
+        <li><%= "#{availability.start_date.strftime('%B %-d, %Y')} - #{availability.end_date.strftime('%B %-d, %Y')}"%></li>
+      </ul>
+      <% end %>
+<% elsif @response.availabilities.empty? %>
   <h2>When are you available?</h2>
 <% else %>
-<h2>Response</h2>
-  <h3>Comment:</h3>
+  <h2>Response</h2>
     <p><%= @response.comment %></p>
-      <% if current_user == @response.user %>
-        <%= link_to "Edit comment", edit_escapade_response_path(@escapade,@response) %>
+      <% if @response.comment == "" %>
+        <%= link_to "Add comment", edit_escapade_response_path(@escapade, @response) %>
+      <% else %>
+        <%= link_to "Edit comment", edit_escapade_response_path(@escapade, @response) %>
       <% end %>
   <h3>Current Availability:</h3>
     <% @response.availabilities.each do |availability| %>
-      <p>
-        <%= "#{availability.start_date.strftime('%B %-d, %Y')} - #{availability.end_date.strftime('%B %-d, %Y')}"%>
-        <% if current_user == @response.user %>
-          <%= link_to "Edit this date range", edit_availability_path(availability) %>
-        <% end %>
-      </p>
+      <ul>
+        <li><%= "#{availability.start_date.strftime('%B %-d, %Y')} - #{availability.end_date.strftime('%B %-d, %Y')}"%></li>
+        <li><%= link_to "Edit this date range", edit_availability_path(availability) %></li>
+      </ul>
     <% end %>
 <% end %>
     <% if current_user == @response.user %>
       <h3>Add Availability: </h3>
-        <p>(This escapade will occur between <%= @escapade.start_date.strftime('%B %-d, %Y') %> and <%= @escapade.end_date.strftime('%B %-d, %Y') %>)</p>
+        <p>(Choose dates between <%= @escapade.start_date.strftime('%B %-d, %Y') %> and <%= @escapade.end_date.strftime('%B %-d, %Y') %>)</p>
         <%= form_for @availability do |f| %>
         <%= f.hidden_field :response_id, value: @response.id %>
         <%= f.hidden_field :escapade_id, value: @escapade.id %>
@@ -27,7 +35,7 @@
         <%= f.date_field :start_date %>
         <%= f.label :end_date %>
         <%= f.date_field :end_date %>
-        <%= f.submit %>
+        <%= f.submit "Add Availability"%>
         <% end %>
     <% end %>
     <%= link_to "Back to Escapade", escapade_path(@escapade) %>
