@@ -1,0 +1,45 @@
+<h2><%= @escapade.title %></h2>
+  <h3><%= @escapade.user.email %></h3>
+  <div class = "idea clearfix" >
+    <div class = "escapade description">
+      <%= image_tag @escapade.image %>
+      <%= @escapade.description %>
+    </div>
+    <div class = "timeframe">
+      <h3>Event Date:</h3>
+        <p><%= "#{@escapade.start_date.strftime('%B %-d, %Y')} - #{@escapade.end_date.strftime('%B %-d, %Y')}"%></p>
+      <% if current_user == @escapade.user %>
+        <%= link_to "Edit Event", edit_escapade_path(@escapade) %>
+        <%= link_to "View Atendees", escapade_commits_path(@escapade) %>
+        <h3>Revert Your Idea to an Event:</h3>
+        <%= form_for @escapade do |f| %>
+          <%= f.radio_button :status, :idea %>
+          <%= f.submit %>
+        <% end %>
+      <% elsif @current_commit.empty? || @current_commit.status == false %>
+        <%= form_for [@escapade, @commit] do |f| %>
+        <%= f.hidden_field :status, value: true %>
+        <%= f.submit "I'll be there!"%>
+        <% end %>
+      <% else %>
+        <%= form_for @current_commit do |f| %>
+        <%= f.hidden_field :status, value: false %>
+        <%= f.submit "I can't make it"%>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class = "responses">
+    <% if @commits %>
+      <h3>Attendees:</h3>
+        <ul>
+          <% @commits.each do |commit| %>
+            <% if commit.status %>
+              <li><%= commit.user.email %></li>
+            <% end %>
+          <% end %>
+        </ul>
+    <% else %>
+      <h3>No one has committed to this event yet</h3>
+    <% end %>
+  </div>

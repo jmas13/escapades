@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118005723) do
+ActiveRecord::Schema.define(version: 20151118144624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 20151118005723) do
   end
 
   add_index "availabilities", ["response_id"], name: "index_availabilities_on_response_id", using: :btree
+
+  create_table "commits", force: :cascade do |t|
+    t.boolean  "status",      null: false
+    t.integer  "user_id"
+    t.integer  "escapade_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "commits", ["escapade_id"], name: "index_commits_on_escapade_id", using: :btree
+  add_index "commits", ["user_id"], name: "index_commits_on_user_id", using: :btree
 
   create_table "escapades", force: :cascade do |t|
     t.string   "title",                                                                                                                                  null: false
@@ -73,6 +84,8 @@ ActiveRecord::Schema.define(version: 20151118005723) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "availabilities", "responses"
+  add_foreign_key "commits", "escapades"
+  add_foreign_key "commits", "users"
   add_foreign_key "escapades", "users"
   add_foreign_key "responses", "escapades"
   add_foreign_key "responses", "users"

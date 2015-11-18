@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   resources :escapades do
     resources :responses
     resources :availabilities, only: [:index]
+    resources :commits
   end
 
   resources :availabilities, only: [:create, :edit, :update]
-
 
 
   # The priority is based upon order of creation: first created -> highest priority.
