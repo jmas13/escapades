@@ -21,7 +21,7 @@
           <%= f.submit %>
         <% end %>
       <% elsif @response.empty? %>
-        <%= link_to "I'm interested in this escapade!", new_escapade_response_path(@escapade) %>
+        <%= link_to "I'm interested in this escapade!", escapade_responses_path(@escapade), method: :post %>
       <% else %>
         <%= link_to "Edit my availability", escapade_response_path(@escapade, @response) %>
         <%= link_to "I'm no longer interested in this escapade", escapade_response_path(@escapade, @response), method: :delete %>

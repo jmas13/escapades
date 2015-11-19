@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'escapades#index'
 
   resources :escapades do
-    resources :responses
+    resources :responses, except: [:new]
     resources :availabilities, only: [:index]
     member do
       post 'add_commit'

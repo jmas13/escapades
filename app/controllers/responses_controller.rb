@@ -1,12 +1,6 @@
 class ResponsesController < ApplicationController
   before_action :authenticate_user!
-
-  def new
-    @escapade = Escapade.find(params[:escapade_id])
-    @response = Response.new
-    @availability = Availability.new
-  end
-
+  
   def show
     @escapade = Escapade.find(params[:escapade_id])
     @response = Response.find(params[:id])
@@ -15,13 +9,8 @@ class ResponsesController < ApplicationController
 
   def create
     @escapade = Escapade.find(params[:escapade_id])
-    @response = @escapade.responses.new(response_params)
-    if @response.save
-      flash[:notice] = "Your response has been posted!"
-      redirect_to escapade_response_path(@escapade, @response)
-    else
-      render :new
-    end
+    @response = @escapade.responses.new(escapade_id: @escapade.id, user_id: current_user.id)
+    redirect_to escapade_response_path(@escapade, @response)
   end
 
   def edit
