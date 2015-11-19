@@ -3,8 +3,9 @@ class FriendshipsController < ApplicationController
   def create
     @friend = User.find(params[:friend_id])
     @friendship = current_user.friendships.build(friend_id: params[:friend_id])
-    @friendship.save
-    flash[:notice] = "You have added #{@friend.email} as your friend!"
+    if @friendship.save
+      flash[:notice] = "You have added #{@friend.email} as your friend!"
+    end
     redirect_to user_path(@friend)
   end
 
