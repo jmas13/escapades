@@ -1,0 +1,23 @@
+<div class = "escapade user-escapades">
+  <h2>My Ideas</h2>
+    <% @user.escapades.each do |escapade| %>
+      <% if escapade.status == 'idea' %>
+        <div class = "escapade thumbnail">
+          <h2><%= link_to escapade.title, escapade_path(escapade) %></h2>
+          <%= link_to (image_tag escapade.image), escapade_path(escapade) %>
+        </div>
+      <% end %>
+    <% end %>
+  <h2>My Events</h2>
+    <% @user.escapades.each do |escapade| %>
+      <% if escapade.status == 'event' %>
+        <div class = "escapade thumbnail">
+          <h2><%= link_to escapade.title, escapade_path(escapade) %></h2>
+          <%= link_to (image_tag escapade.image), escapade_path(escapade) %>
+        </div>
+      <% end %>
+    <% end %>
+</div>
+<div class = "escapade user-friends">
+  <h2>My Friends</h2>
+</div>

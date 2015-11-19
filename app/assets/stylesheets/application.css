@@ -50,7 +50,7 @@ form .description {
   padding: 10px;
 }
 
-.escapade * {
+.escapade *:not(.thumbnail) {
   max-width: 100%;
   display: block;
   margin: 0px auto 10px auto;
@@ -78,6 +78,16 @@ form .description {
   display: inline-block;
   float: left;
   margin: 20px;
+}
+
+.user-escapades {
+  float: left;
+  max-width: 70%;
+}
+
+.user-friends {
+  display: inline-block;
+  float: left;
 }
 
 .timeframe * {
