@@ -9,7 +9,7 @@
     </div>
     <div class = "timeframe">
       <h3>Event Date:</h3>
-        <p><%= "#{@escapade.format_start_date} - #{@escapade.end_date.strftime('%B %-d, %Y')}"%></p>
+        <p><%= "#{@escapade.format_start_date} - #{@escapade.format_end_date}"%></p>
       <% if current_user == @escapade.user %>
         <%= link_to "Edit Event", edit_escapade_path(@escapade) %>
         <h3>Revert Your Event to an Idea:</h3>

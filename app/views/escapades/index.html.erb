@@ -1,6 +1,18 @@
-<% @escapades.each do |escapade| %>
-  <div class = "escapade thumbnail">
-    <h2><%= link_to escapade.title, escapade_path(escapade) %></h2>
-    <%= link_to (image_tag escapade.image), escapade_path(escapade) %>
-  </div>
-<% end %>
+<h2>Ideas</h2>
+  <% @escapades.each do |escapade| %>
+    <% if escapade.status == "idea" %>
+      <div class = "escapade thumbnail">
+        <h3><%= link_to escapade.title, escapade_path(escapade) %></h3>
+        <%= link_to (image_tag escapade.image), escapade_path(escapade) %>
+      </div>
+    <% end %>
+  <% end %>
+<h2>Events</h2>
+  <% @escapades.each do |escapade| %>
+    <% if escapade.status == "event" %>
+      <div class = "escapade thumbnail">
+        <h3><%= link_to escapade.title, escapade_path(escapade) %></h3>
+        <%= link_to (image_tag escapade.image), escapade_path(escapade) %>
+      </div>
+    <% end %>
+  <% end %>

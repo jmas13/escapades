@@ -39,6 +39,10 @@ form .description {
   overflow: scroll;
 }
 
+.users * {
+  margin: 10px;
+}
+
 .login {
   float: right;
 }

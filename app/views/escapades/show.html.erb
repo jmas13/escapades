@@ -7,7 +7,7 @@
     </div>
     <div class = "timeframe">
       <h3>Timeframe:</h3>
-        <p><%= "#{@escapade.start_date.strftime('%B %-d, %Y')} - #{@escapade.end_date.strftime('%B %-d, %Y')}"%></p>
+        <p><%= "#{@escapade.format_start_date} - #{@escapade.format_end_date}"%></p>
       <% if current_user == @escapade.user %>
         <%= link_to "Edit Idea", edit_escapade_path(@escapade) %>
         <h3>Optimal Dates:</h3>
