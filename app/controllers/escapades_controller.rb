@@ -64,6 +64,8 @@ class EscapadesController < ApplicationController
     redirect_to escapade_path(@escapade)
   end
 
+
+
   private
   def escapade_params
     params.require(:escapade).permit(:title, :image, :description, :start_date, :end_date, :status).merge(user_id: current_user.id)

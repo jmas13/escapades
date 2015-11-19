@@ -1,3 +1,7 @@
-<%= render 'form' %>
+<%= @response.errors.full_messages.first if @response.errors.any? %>
 
-<%= link_to "No longer interested", escapade_response_path(@escapade, @response), method: :delete %>
+<%= form_for([@escapade, @response ]) do |f| %>
+<%= f.label :comment %>
+<%= f.text_field :comment %>
+<%= f.submit "Post Comment" %>
+<% end %>

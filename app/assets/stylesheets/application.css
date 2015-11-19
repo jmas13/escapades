@@ -96,3 +96,11 @@ form .description {
 li {
 list-style: none;
 }
+
+.edit-response * {
+  display: block;
+}
+
+.edit-response a {
+  margin: 10px;
+}
