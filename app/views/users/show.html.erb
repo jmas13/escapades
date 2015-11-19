@@ -1,5 +1,19 @@
+<% if current_user == @user %>
+  <h2>My Profile</h2>
+<% else %>
+  <h2><%= @user.email %></h2>
+<% end %>
+<div class = "friending">
+  <% unless @user == current_user %>
+    <% if current_user.friends.include?(@user) %>
+      <%= link_to "Remove #{@user.email} from my friends", friendship_path(current_user.friendships.find_by(friend_id: @user)), method: :delete %>
+    <% else %>
+      <%= link_to "Add #{@user.email} to my friends", friendships_path(friend_id: @user), method: :post %>
+    <% end %>
+  <% end %>
+</div>
 <div class = "escapade user-escapades">
-  <h2>My Ideas</h2>
+  <h2>Ideas</h2>
     <% @user.escapades.each do |escapade| %>
       <% if escapade.status == 'idea' %>
         <div class = "escapade thumbnail">
@@ -8,7 +22,7 @@
         </div>
       <% end %>
     <% end %>
-  <h2>My Events</h2>
+  <h2>Events</h2>
     <% @user.escapades.each do |escapade| %>
       <% if escapade.status == 'event' %>
         <div class = "escapade thumbnail">
@@ -19,10 +33,10 @@
     <% end %>
 </div>
 <div class = "user-friends">
-  <h2>My Friends</h2>
+  <h2>Friends</h2>
   <ul>
     <% @user.friends.each do |friend| %>
-      <li><%= friend.email %></li>
+      <li><%= link_to friend.email, user_path(friend) %></li>
     <% end %>
   </ul>
 </div>

@@ -1,4 +1,6 @@
 <h2><%= @escapade.title %></h2>
+  <h3><%= link_to @escapade.user.email, user_path(@escapade.user) %></h3>
+<h2><%= @escapade.title %></h2>
   <h3><%= @escapade.user.email %></h3>
   <div class = "idea clearfix" >
     <div class = "escapade description">

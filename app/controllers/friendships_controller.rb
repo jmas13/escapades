@@ -1,12 +1,18 @@
 class FriendshipsController < ApplicationController
 
   def create
-    current_user.friendships.create(friend_id: params[:friend_id])
-    flash[:notice] = "You have added #{User.find(params[:friend_id]).email} as your friend!"
-    redirect_to user_path(current_user)
+    @friend = User.find(params[:friend_id])
+    @friendship = current_user.friendships.build(friend_id: params[:friend_id])
+    @friendship.save
+    flash[:notice] = "You have added #{@friend.email} as your friend!"
+    redirect_to user_path(@friend)
   end
 
   def destroy
-    Friendship.find()
+    @friendship = current_user.friendships.find(params[:id])
+    @friend = User.find(@friendship.friend_id)
+    @friendship.destroy
+    flash[:notice] = "You have removed #{@friend.email} from your friends"
+    redirect_to user_path(current_user)
   end
 end
