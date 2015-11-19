@@ -1,5 +1,6 @@
 <h2><%= @escapade.title %></h2>
   <h3><%= @escapade.user.email %></h3>
+  <%= link_to "Add Friend", friendships_path(friend_id: @escapade.user), method: :post %>
   <div class = "idea clearfix" >
     <div class = "escapade description">
       <%= image_tag @escapade.image %>
