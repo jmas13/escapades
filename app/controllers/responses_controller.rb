@@ -1,6 +1,6 @@
 class ResponsesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def show
     @escapade = Escapade.find(params[:escapade_id])
     @response = Response.find(params[:id])
@@ -9,7 +9,7 @@ class ResponsesController < ApplicationController
 
   def create
     @escapade = Escapade.find(params[:escapade_id])
-    @response = @escapade.responses.new(escapade_id: @escapade.id, user_id: current_user.id)
+    @response = @escapade.responses.create(escapade_id: @escapade.id, user_id: current_user.id)
     redirect_to escapade_response_path(@escapade, @response)
   end
 
