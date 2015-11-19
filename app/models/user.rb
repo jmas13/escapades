@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
   has_many :responses
   has_many :escapades
   has_many :commits
+  has_many :friendships
+  has_many :friends, through: :friendships
 end

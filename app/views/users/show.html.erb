@@ -18,6 +18,11 @@
       <% end %>
     <% end %>
 </div>
-<div class = "escapade user-friends">
+<div class = "user-friends">
   <h2>My Friends</h2>
+  <ul>
+    <% @user.friends.each do |friend| %>
+      <li><%= friend.email %></li>
+    <% end %>
+  </ul>
 </div>
