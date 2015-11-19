@@ -10,8 +10,7 @@
         <p><%= "#{@escapade.start_date.strftime('%B %-d, %Y')} - #{@escapade.end_date.strftime('%B %-d, %Y')}"%></p>
       <% if current_user == @escapade.user %>
         <%= link_to "Edit Event", edit_escapade_path(@escapade) %>
-        <%= link_to "View Atendees", escapade_commits_path(@escapade) %>
-        <h3>Revert Your Idea to an Event:</h3>
+        <h3>Revert Your Event to an Idea:</h3>
         <%= form_for @escapade do |f| %>
           <%= f.radio_button :status, :idea %>
           <%= f.submit %>
@@ -27,7 +26,7 @@
     <% if @commits %>
       <h3>Attendees:</h3>
         <ul>
-          <% @escapade.commits do |commit| %>
+          <% @escapade.commits.each do |commit| %>
             <li><%= commit.user.email %></li>
           <% end %>
         </ul>
