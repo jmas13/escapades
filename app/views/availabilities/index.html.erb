@@ -7,7 +7,7 @@
       <% response.availabilities.each do |availability| %>
       <ul>
         <li>
-          <%= "#{availability.start_date.strftime('%B %-d, %Y')} - #{availability.end_date.strftime('%B %-d, %Y')}"%>
+          <%= "#{format_date(availability.start_date)} - #{format_date(availability.end_date)}"%>
         </li>
       </ul>
       <% end %>

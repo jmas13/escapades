@@ -7,12 +7,12 @@
     </div>
     <div class = "timeframe">
       <h3>Timeframe:</h3>
-        <p><%= "#{@escapade.format_start_date} - #{@escapade.format_end_date}"%></p>
+        <p><%= "#{format_date(@escapade.start_date)} - #{format_date(@escapade.end_date)}"%></p>
       <% if current_user == @escapade.user %>
         <%= link_to "Edit Idea", edit_escapade_path(@escapade) %>
         <h3>Optimal Dates:</h3>
           <% @optimal_dates.each do |i|%>
-            <p><%= "#{i.first.strftime('%B %-d, %Y')} - #{i.last.strftime('%B %-d, %Y')}" %></p>
+            <p><%= "#{format_date(i.first)} - #{format_date(i.last)}" %></p>
           <% end %>
         <%= link_to "View all availability", escapade_availabilities_path(@escapade) %>
         <h3>Upgrade Your Idea to an Event:</h3>

@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   def get_optimal_dates escapade
     optimal_dates = (escapade.start_date..escapade.end_date).to_a
     escapade.responses.each do |response|
@@ -13,4 +14,9 @@ module ApplicationHelper
     end
     optimal_dates = optimal_dates.each_slice(2).to_a
   end
+
+  def format_date date
+    date.strftime('%B %-d, %Y')
+  end
+
 end

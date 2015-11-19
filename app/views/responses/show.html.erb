@@ -5,7 +5,7 @@
     <h3>Current Availability:</h3>
       <% @response.availabilities.each do |availability| %>
       <ul>
-        <li><%= "#{availability.start_date.strftime('%B %-d, %Y')} - #{availability.end_date.strftime('%B %-d, %Y')}"%></li>
+        <li><%= "#{format_date(availability.start_date)} - #{format_date(availability.end_date)}"%></li>
       </ul>
       <% end %>
 <% elsif @response.availabilities.empty? %>
@@ -21,14 +21,14 @@
   <h3>Current Availability:</h3>
     <% @response.availabilities.each do |availability| %>
       <ul>
-        <li><%= "#{availability.start_date.strftime('%B %-d, %Y')} - #{availability.end_date.strftime('%B %-d, %Y')}"%></li>
+        <li><%= "#{format_date(availability.start_date)} - #{format_date(availability.end_date)}"%></li>
         <li><%= link_to "Edit this date range", edit_availability_path(availability) %></li>
       </ul>
     <% end %>
 <% end %>
     <% if current_user == @response.user %>
       <h3>Add Availability: </h3>
-        <p>(Choose dates between <%= @escapade.start_date.strftime('%B %-d, %Y') %> and <%= @escapade.end_date.strftime('%B %-d, %Y') %>)</p>
+        <p>(Choose dates between <%= format_date(@escapade.start_date) %> and <%= format_date(@escapade.end_date) %>)</p>
         <%= form_for @availability do |f| %>
         <%= f.hidden_field :response_id, value: @response.id %>
         <%= f.hidden_field :escapade_id, value: @escapade.id %>
