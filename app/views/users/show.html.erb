@@ -42,11 +42,11 @@
 </div>
 <div class = "user-friends">
   <h2>Friends</h2>
-    <% if @user.friends.empty? %>
+    <% if (@user.friends | @user.inverse_friends).empty? %>
       <h3><%= @user.email %> is without any friends</h3>
     <% else %>
       <ul>
-        <% (@user.friends + @user.inverse_friends).each do |friend| %>
+        <% (@user.friends | @user.inverse_friends).each do |friend| %>
           <li><%= link_to friend.email, user_path(friend) %></li>
         <% end %>
       </ul>
