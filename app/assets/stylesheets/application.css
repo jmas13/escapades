@@ -39,6 +39,14 @@ form .description {
   overflow: scroll;
 }
 
+footer {
+  text-align: center;
+  padding: 50px;
+}
+
+footer p {
+  margin: 20px;
+}
 .users * {
   margin: 10px;
 }
@@ -123,13 +131,4 @@ list-style: none;
 
 .edit-response a {
   margin: 10px;
-}
-
-footer {
-  text-align: center;
-  padding: 50px;
-}
-
-footer p {
-  margin: 20px;
 }
