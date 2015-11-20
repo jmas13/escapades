@@ -1,4 +1,7 @@
 <h2>Ideas</h2>
+  <% unless @escapades.where(status: "idea").first %>
+    <h3>There are no idea listings at present</h3>
+  <% end %>
   <% @escapades.each do |escapade| %>
     <% if escapade.status == "idea" %>
       <div class = "escapade thumbnail">
@@ -8,6 +11,9 @@
     <% end %>
   <% end %>
 <h2>Events</h2>
+  <% unless @escapades.where(status: "event").first %>
+    <h3>There are no event listings at present</h3>
+  <% end %>
   <% @escapades.each do |escapade| %>
     <% if escapade.status == "event" %>
       <div class = "escapade thumbnail">

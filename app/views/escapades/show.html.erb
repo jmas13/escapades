@@ -30,6 +30,9 @@
   </div>
   <div class = "responses">
     <h3>Responses:</h3>
+      <% unless @responses.first %>
+        <p>Responses are lacking for this idea</p>
+      <% end %>
       <% @responses.each do |response| %>
         <ul>
           <li><%= response.user.email %>

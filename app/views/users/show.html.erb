@@ -14,29 +14,41 @@
 </div>
 <div class = "escapade user-escapades">
   <h2>Ideas</h2>
-    <% @user.escapades.each do |escapade| %>
-      <% if escapade.status == 'idea' %>
-        <div class = "escapade thumbnail">
-          <h2><%= link_to escapade.title, escapade_path(escapade) %></h2>
-          <%= link_to (image_tag escapade.image), escapade_path(escapade) %>
-        </div>
+    <% if @user.escapades.where(status: "idea").empty? %>
+      <h3><%= @user.email %> is without any ideas</h3>
+    <% else %>
+      <% @user.escapades.each do |escapade| %>
+        <% if escapade.status == 'idea' %>
+          <div class = "escapade thumbnail">
+            <h2><%= link_to escapade.title, escapade_path(escapade) %></h2>
+            <%= link_to (image_tag escapade.image), escapade_path(escapade) %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
   <h2>Events</h2>
-    <% @user.escapades.each do |escapade| %>
-      <% if escapade.status == 'event' %>
-        <div class = "escapade thumbnail">
-          <h2><%= link_to escapade.title, escapade_path(escapade) %></h2>
-          <%= link_to (image_tag escapade.image), escapade_path(escapade) %>
-        </div>
+    <% if @user.escapades.where(status: "event").empty? %>
+      <h3><%= @user.email %> is without any events</h3>
+    <% else %>
+      <% @user.escapades.each do |escapade| %>
+        <% if escapade.status == 'event' %>
+          <div class = "escapade thumbnail">
+            <h2><%= link_to escapade.title, escapade_path(escapade) %></h2>
+            <%= link_to (image_tag escapade.image), escapade_path(escapade) %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
 </div>
 <div class = "user-friends">
   <h2>Friends</h2>
+    <% if @user.friends.empty? %>
+      <h3><%= @user.email %> is without any friends</h3>
+    <% else %>
       <ul>
         <% (@user.friends + @user.inverse_friends).each do |friend| %>
           <li><%= link_to friend.email, user_path(friend) %></li>
         <% end %>
       </ul>
+    <% end %>
 </div>
