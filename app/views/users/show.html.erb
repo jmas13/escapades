@@ -5,7 +5,7 @@
 <% end %>
 <div class = "friending">
   <% unless @user == current_user %>
-    <% if current_user.friends.include?(@user) %>
+    <% if (current_user.friends | current_user.inverse_friends).include?(@user) %>
       <%= link_to "Remove #{@user.email} from my friends", friendship_path(current_user.friendships.find_by(friend_id: @user)), method: :delete %>
     <% else %>
       <%= link_to "Add #{@user.email} to my friends", friendships_path(friend_id: @user), method: :post %>
