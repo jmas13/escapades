@@ -104,7 +104,7 @@ They will also assign a **Total Score**, to serve as an overall gauge of whether
 
 > :+1: everything I put in the validator was error free
 
-## Deployment and Functionality - Does not meet expectations ...yet
+## Deployment and Functionality - Meets expectations
 ##### How accessible is your app to those who may want to explore it?
 - Cursory use of the app by an uninformed user yields no errors that "break" it
 
@@ -116,8 +116,8 @@ They will also assign a **Total Score**, to serve as an overall gauge of whether
 
 - The contents of the creator's Github repository is identical to that of the Heroku repository
 
-> N/A
+> :+1:
 
 - The `URL` field of the Github repository contains a link to the deployed version of the app
 
-> N/A
+> Make sure to add this
